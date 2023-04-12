@@ -10,6 +10,7 @@ import ApartmentNew from "./pages/ApartmentNew";
 import ApartmentEdit from "./pages/ApartmentEdit";
 import NotFound from "./pages/NotFound";
 
+
 const App = (props) => {
   return (
     <>
