@@ -1,9 +1,25 @@
 @import "bootstrap";
 
 
+header {
+    margin-bottom: 80px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+=======
+
 // home page
 .home-title, .app-description{
     display: block;
     justify-content: center;
     text-align: center;
+
 }
