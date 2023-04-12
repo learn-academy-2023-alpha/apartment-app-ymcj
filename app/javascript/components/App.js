@@ -11,14 +11,7 @@ import ApartmentNew from "./pages/ApartmentNew"
 import NotFound from "./pages/NotFound"
 
 
-
-const App = ({
-  logged_in,
-  current_user,
-  new_user_route,
-  sign_in_route,
-  sign_out_route
-}) => {
+const App = (props) => {
   const [apartments, setApartments] = useState([])
 
   useEffect(() => {
@@ -31,11 +24,11 @@ const App = ({
     .then((payload) => setApartments(payload))
     .catch((error) => console.log(error))
   }
-  
+
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header {...props} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments} />} />
@@ -47,7 +40,7 @@ const App = ({
         <Footer />
       </BrowserRouter>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
