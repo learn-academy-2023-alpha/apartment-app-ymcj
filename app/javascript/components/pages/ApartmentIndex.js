@@ -23,11 +23,6 @@ const ApartmentIndex = ({apartments}) => {
                 <CardTitle tag="h5">
                   {apartment.address},{apartment.planet}
                 </CardTitle>
-                {/* <Button>
-                  <NavLink to={`/apartmentshow/${apartment.id}`} >
-                    See More Info
-                  </NavLink>
-                </Button> */}
               </CardBody>
             </Card>
           )
