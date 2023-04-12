@@ -4,6 +4,11 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Navigation from "./components/Navigation"
 import Home from "./pages/Home"
+import ApartmentIndex from "./pages/ApartmentIndex"
+import ApartmentShow from "./pages/ApartmentShow"
+import ApartmentEdit from "./pages/ApartmentEdit"
+import ApartmentNew from "./pages/ApartmentNew"
+import NotFound from "./pages/NotFound"
 
 
 
