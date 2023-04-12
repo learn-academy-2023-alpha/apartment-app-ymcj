@@ -10,7 +10,6 @@ describe("<Home />", () => {
           <Home />
         </BrowserRouter>
       )
-    //   screen.logTestingPlaygroundURL()
         const header = screen.getByRole('heading', {
         name: /welcome to the ymcj apartment department/i
     })
