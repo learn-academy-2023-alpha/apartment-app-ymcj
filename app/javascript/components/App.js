@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
@@ -19,6 +19,18 @@ const App = ({
   sign_in_route,
   sign_out_route
 }) => {
+  const [apartments, setApartments] = useState([])
+
+  useEffect(() => {
+    readApartments()
+  }, [])
+
+  const readApartments = () => {
+    fetch("/apartments")
+    .then((response) => response.json())
+    .then((payload) => setApartments(payload))
+    .catch((error) => console.log(error))
+  }
   
   return (
     <>
@@ -26,7 +38,7 @@ const App = ({
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/apartmentindex" element={<ApartmentIndex />} />
+          <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments} />} />
           <Route path="/apartmentshow/:id" element={<ApartmentShow />} />
           <Route path="/apartmentedit/:id" element={<ApartmentEdit />} />
           <Route path="/apartmentnew" element={<ApartmentNew />} />

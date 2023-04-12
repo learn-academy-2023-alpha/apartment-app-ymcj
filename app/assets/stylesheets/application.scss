@@ -7,3 +7,10 @@
     justify-content: center;
     text-align: center;
 }
+
+// Apartment Index
+.apartments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    justify-items: center;
+  }
