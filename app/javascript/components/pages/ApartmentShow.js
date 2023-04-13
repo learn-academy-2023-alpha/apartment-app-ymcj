@@ -4,7 +4,7 @@ import {Card, CardBody, CardSubtitle, CardText, CardTitle, Button} from "reactst
 import {NavLink} from "react-router-dom"
 
 
-const ApartmentShow = ({apartments}) => {
+const ApartmentShow = ({apartments, logged_in}) => {
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -12,6 +12,7 @@ const ApartmentShow = ({apartments}) => {
 
     return (
     <>
+    
       {selectedApartment && (
         <Card
         style={{
@@ -48,12 +49,16 @@ const ApartmentShow = ({apartments}) => {
         </CardBody>
       </Card>
       )}
+      {logged_in && (
+        <>
       <Button>
       <NavLink 
       to={`/apartmentedit/${selectedApartment?.id}`}>
           Edit Apartment
       </NavLink>
       </Button>
+      </>
+    )}
       <Button>
       <NavLink 
       to={`/apartmentindex`}>

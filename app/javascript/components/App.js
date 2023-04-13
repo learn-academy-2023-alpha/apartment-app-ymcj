@@ -48,7 +48,7 @@ const App = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments} />} />
-          <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments}/>} />
+          <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments} {...props}/>} />
           <Route path="/apartmentedit/:id" element={<ApartmentEdit />} />
           <Route path="/myapartments" element={<ProtectedIndex apartments={apartments} current_user={props.current_user} />} />
           <Route path="/apartmentnew" element={<ApartmentNew current_user={props.current_user} createApartment={createApartment} />} />
