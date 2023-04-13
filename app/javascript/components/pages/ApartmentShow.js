@@ -3,11 +3,13 @@ import { useParams, useNavigate } from "react-router-dom"
 import {Card, CardBody, CardSubtitle, CardText, CardTitle, Button} from "reactstrap"
 import {NavLink} from "react-router-dom"
 
-// test
+
 const ApartmentShow = ({apartments}) => {
     const { id } = useParams()
     const navigate = useNavigate()
+
     let selectedApartment = apartments?.find(apartment => apartment.id === +id)
+
     return (
     <>
       {selectedApartment && (
@@ -22,12 +24,15 @@ const ApartmentShow = ({apartments}) => {
         />
         <CardBody>
           <CardTitle>
+
             Address: {selectedApartment.address}
+
           </CardTitle>
           <CardSubtitle>
             Planet: {selectedApartment.planet}
           </CardSubtitle>
           <CardText>
+
             Bedrooms: {selectedApartment.bedrooms}
           </CardText>
           <CardText>
@@ -42,20 +47,25 @@ const ApartmentShow = ({apartments}) => {
             Pets: {selectedApartment.pets}
           </CardText><CardText>
             Parking: {selectedApartment.parking}
+
           </CardText>
         </CardBody>
       </Card>
       )}
       <Button>
       <NavLink 
+
       to={`/apartmentedit/${selectedApartment?.id}`}>
+
           Edit Apartment
       </NavLink>
       </Button>
       <Button>
       <NavLink 
       to={`/apartmentindex`}>
+
           Back to Listings
+
       </NavLink>
       </Button>
     </>

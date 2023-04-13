@@ -22,12 +22,18 @@ ul {
     text-align: center;
 }
 
+.create-form{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+=======
 // Apartment Index
 .apartments {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     justify-items: center;
  }
+
 
 
 
