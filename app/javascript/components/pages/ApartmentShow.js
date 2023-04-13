@@ -24,15 +24,12 @@ const ApartmentShow = ({apartments}) => {
         />
         <CardBody>
           <CardTitle>
-
             Address: {selectedApartment.address}
-
           </CardTitle>
           <CardSubtitle>
             Planet: {selectedApartment.planet}
           </CardSubtitle>
           <CardText>
-
             Bedrooms: {selectedApartment.bedrooms}
           </CardText>
           <CardText>
@@ -47,25 +44,20 @@ const ApartmentShow = ({apartments}) => {
             Pets: {selectedApartment.pets}
           </CardText><CardText>
             Parking: {selectedApartment.parking}
-
           </CardText>
         </CardBody>
       </Card>
       )}
       <Button>
       <NavLink 
-
       to={`/apartmentedit/${selectedApartment?.id}`}>
-
           Edit Apartment
       </NavLink>
       </Button>
       <Button>
       <NavLink 
       to={`/apartmentindex`}>
-
           Back to Listings
-
       </NavLink>
       </Button>
     </>
