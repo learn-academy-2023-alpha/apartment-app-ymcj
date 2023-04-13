@@ -7,11 +7,13 @@ import {NavLink} from "react-router-dom"
 const ApartmentShow = ({apartments}) => {
     const { id } = useParams()
     const navigate = useNavigate()
+
     let selectedApartment = apartments?.find(apartment => apartment.id === +id)
 
     // const handleSubmit = () => {
     //   navigate("/apartmentindex")
     // }
+
 
     return (
     <>
@@ -27,12 +29,15 @@ const ApartmentShow = ({apartments}) => {
         />
         <CardBody>
           <CardTitle>
+
             Address: {selectedApartment.address}
+
           </CardTitle>
           <CardSubtitle>
             Planet: {selectedApartment.planet}
           </CardSubtitle>
           <CardText>
+
             Bedrooms: {selectedApartment.bedrooms}
           </CardText>
           <CardText>
@@ -47,6 +52,7 @@ const ApartmentShow = ({apartments}) => {
             Pets: {selectedApartment.pets}
           </CardText><CardText>
             Parking: {selectedApartment.parking}
+
           </CardText>
         </CardBody>
       </Card>
@@ -54,14 +60,18 @@ const ApartmentShow = ({apartments}) => {
       )}
       <Button>
       <NavLink 
+
       to={`/apartmentedit/${selectedApartment?.id}`}>
+
           Edit Apartment
       </NavLink>
       </Button>
       <Button>
       <NavLink 
       to={`/apartmentindex`}>
+
           Back to Listings
+
       </NavLink>
       </Button>
     

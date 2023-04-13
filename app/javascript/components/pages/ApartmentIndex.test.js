@@ -12,7 +12,6 @@ describe("<ApartmentIndex />", () => {
         <ApartmentIndex />
       </BrowserRouter>
     )
-    screen.logTestingPlaygroundURL()
     const apartmentListings = screen.getByRole('heading', {
         name: /apartment listings/i
       })
