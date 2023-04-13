@@ -15,6 +15,11 @@ ul {
     flex-direction: row;
 }
 
+footer {
+    margin-top: 80px;
+}
+
+
 // home page
 .home-title, .app-description{
     display: block;
@@ -26,7 +31,7 @@ ul {
     margin-left: 20%;
     margin-right: 20%;
 }
-=======
+
 // Apartment Index
 .apartments {
     display: grid;
