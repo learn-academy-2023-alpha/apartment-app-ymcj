@@ -11,8 +11,8 @@ describe("<Header />", () => {
       <BrowserRouter>
         <Header />
       </BrowserRouter>
-    );
-  });
+    )
+  })
 
   it("has clickable links for a registered user", () => {
     render(
