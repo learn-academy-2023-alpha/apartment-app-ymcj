@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import {Card, CardBody, CardSubtitle, CardText, CardTitle, Button} from "reactstrap"
 import {NavLink} from "react-router-dom"
 
-
+// test
 const ApartmentShow = ({apartments}) => {
     const { id } = useParams()
     const navigate = useNavigate()
