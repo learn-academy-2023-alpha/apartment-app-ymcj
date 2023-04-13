@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+* {
+    margin: 0 auto;
+    text-align: center;
+}
 
 header {
     margin-bottom: 80px;
@@ -18,7 +22,6 @@ ul {
 footer {
     margin-top: 80px;
 }
-
 
 // home page
 .home-title, .app-description{

@@ -39,13 +39,12 @@ RSpec.describe "Apartments", type: :request do
           image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
           user_id: user.id
       }
-    }
-  
+  }
 
     post "/apartments", params: apartment_params
 
-    expect(response).to have_htpp_status(200)
-    apartment = Apartment.first
+    expect(response).to have_http_status(200)
+    apartment = Apartment.last
     expect(apartment.address).to eq "14 Glamuleon Drive"
     expect(apartment.bedrooms).to eq 3
     expect(apartment.bathrooms).to eq 7
@@ -56,7 +55,7 @@ RSpec.describe "Apartments", type: :request do
     expect(apartment.pets).to eq true
     expect(apartment.parking).to eq "ship hangar"
     expect(apartment.image).to eq "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg"
-    expect(apartment.user_id).to eq 1
+    expect(apartment.user_id).to eq user.id  
   end
 end
 
@@ -192,5 +191,32 @@ it "does not create an apartment without a user_id" do
     expect(json['user_id']).to include "can't be blank"
 end
 
-  
+describe "DELETE /destroy" do
+  it "deletes an apartment" do
+    apartment_params = {
+        apartment: {
+          bedrooms: 3,
+          bathrooms: 7,
+          address: "14 Glamuleon Drive",
+          planet: "GlipGlop",
+          square_footage: 2000,
+          price: 500000,
+          utilities: "solar panels, slime chamber, washing machine",
+          pets: true,
+          parking: "ship hangar",
+          image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+          user_id: user.id
+      }
+  }
+
+  post "/apartments", params: apartment_params
+  apartment = Apartment.first 
+  apartments = Apartment.all
+
+  delete "/apartments/#{apartment.id}"
+  expect(response).to have_http_status(200)
+  expect(apartments).to be_empty
+  end
+end
+
 end

@@ -13,6 +13,14 @@ class ApartmentsController < ApplicationController
         end
     end
 
+    def destroy
+        apartment = Apartment.find(params[:id])
+        apartment.destroy
+        if apartment.valid?
+            render json: apartment
+        end
+    end 
+
     private 
     def apartment_params
         params.require(:apartment).permit(:bedrooms, :bathrooms, :address, :planet, :square_footage, :price, :utilities, :pets, :parking, :image, :user_id)
