@@ -8,11 +8,6 @@ const ApartmentShow = ({apartments}) => {
     const { id } = useParams()
     const navigate = useNavigate()
     let selectedApartment = apartments?.find(apartment => apartment.id === +id)
-
-    // const handleSubmit = () => {
-    //   navigate("/apartmentindex")
-    // }
-
     return (
     <>
       {selectedApartment && (
@@ -50,7 +45,6 @@ const ApartmentShow = ({apartments}) => {
           </CardText>
         </CardBody>
       </Card>
-      
       )}
       <Button>
       <NavLink 
@@ -64,7 +58,6 @@ const ApartmentShow = ({apartments}) => {
           Back to Listings
       </NavLink>
       </Button>
-    
     </>
   )
 }
