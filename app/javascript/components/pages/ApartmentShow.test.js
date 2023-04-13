@@ -22,19 +22,29 @@ describe("<ApartmentShow />", () => {
     const planet=screen.getByText(`Planet: ${apartments[0].planet}`)
     expect(planet).toBeInTheDocument()
   })
-    it("has clickable links for an unregistered user", () => {
-        render(
-          <BrowserRouter>
-            <ApartmentShow logged_in={false} />
-          </BrowserRouter>
-        )
-        screen.logTestingPlaygroundURL()
-        const editApartments = userEvent.click(
-          screen.getByRole("link", { name: /edit apartment/i })
-        )
-        const allApartments = userEvent.click(
-            screen.getByRole("link", { name: /back to listings/i })
-        )
-    })
+  it("has clickable links for an unregistered user", () => {
+    render(
+      <BrowserRouter>
+        <ApartmentShow logged_in={false} />
+      </BrowserRouter>
+    )
+    const editApartments = userEvent.click(
+      screen.getByRole("link", { name: /edit apartment listing/i })
+    )
+    const allApartments = userEvent.click(
+      screen.getByRole("link", { name: /back to listings/i })
+    )
   })
+  it("has a delete button for a register user", () => {
+    render(
+      <BrowserRouter>
+        <ApartmentShow logged_in={true} />
+      </BrowserRouter>
+    )
+    const deleteApartment = userEvent.click(
+      screen.getByRole("link", { name: /delete apartment listing/i })
+    )
+  })
+})
+
 export default ApartmentShow

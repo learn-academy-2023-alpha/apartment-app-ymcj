@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
-import Navigation from "./components/Navigation"
 import Home from "./pages/Home"
 import ApartmentIndex from "./pages/ApartmentIndex"
 import ApartmentShow from "./pages/ApartmentShow"
@@ -37,10 +36,21 @@ const App = (props) => {
     .then((response) => response.json())
     .then(() => readApartments())
     .catch((error) => console.log(error))
-
-
   }
   
+  const deleteApartment = (id) => {
+    fetch(`/apartments/${id}`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "DELETE"
+    })
+    .then((response) => response.json())
+    .then(() => readApartments())
+    .catch((error) => console.log(error))
+  }
+
+
   return (
     <>
       <BrowserRouter>
@@ -48,7 +58,7 @@ const App = (props) => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments} />} />
-          <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments}/>} />
+          <Route path="/apartmentshow/:id" element={<ApartmentShow apartments={apartments} deleteApartment={deleteApartment}/>} />
           <Route path="/apartmentedit/:id" element={<ApartmentEdit />} />
           <Route path="/myapartments" element={<ProtectedIndex apartments={apartments} current_user={props.current_user} />} />
           <Route path="/apartmentnew" element={<ApartmentNew current_user={props.current_user} createApartment={createApartment} />} />
