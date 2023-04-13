@@ -7,11 +7,8 @@ import {NavLink} from "react-router-dom"
 const ApartmentShow = ({apartments}) => {
     const { id } = useParams()
     const navigate = useNavigate()
-    let selectedApartment = apartments.find(apartment => apartment.id === +id)
 
-    const handleSubmit = () => {
-      navigate("/apartmentindex")
-    }
+    let selectedApartment = apartments?.find(apartment => apartment.id === +id)
 
     return (
     <>
@@ -27,44 +24,42 @@ const ApartmentShow = ({apartments}) => {
         />
         <CardBody>
           <CardTitle>
-            {selectedApartment.address}
+            Address: {selectedApartment.address}
           </CardTitle>
           <CardSubtitle>
             Planet: {selectedApartment.planet}
           </CardSubtitle>
           <CardText>
-            Bedrooms: {selectedPlant.bedrooms}
+            Bedrooms: {selectedApartment.bedrooms}
           </CardText>
           <CardText>
-            Bathrooms: {selectedPlant.bathrooms}
+            Bathrooms: {selectedApartment.bathrooms}
           </CardText><CardText>
-            square_footage: {selectedPlant.square_footage}
+            square_footage: {selectedApartment.square_footage}
           </CardText><CardText>
-            Price: {selectedPlant.price}
+            Price: {selectedApartment.price}
           </CardText><CardText>
-            Utilities: {selectedPlant.utilities}
+            Utilities: {selectedApartment.utilities}
           </CardText><CardText>
-            Pets: {selectedPlant.pets}
+            Pets: {selectedApartment.pets}
           </CardText><CardText>
-            Parking: {selectedPlant.parking}
+            Parking: {selectedApartment.parking}
           </CardText>
         </CardBody>
       </Card>
-      
       )}
       <Button>
       <NavLink 
-      to={`/apartmentedit/${selectedApartment.id}`}>
+      to={`/apartmentedit/${selectedApartment?.id}`}>
           Edit Apartment
       </NavLink>
       </Button>
       <Button>
       <NavLink 
       to={`/apartmentindex`}>
-          Back to Apartment Index
+          Back to Listings
       </NavLink>
       </Button>
-    
     </>
   )
 }

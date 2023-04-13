@@ -21,7 +21,12 @@ const ApartmentIndex = ({apartments}) => {
               />
               <CardBody>
                 <CardTitle tag="h5">
-                  {apartment.address},{apartment.planet}
+                  {apartment.address},
+                  <br/>
+                  {apartment.planet}
+                </CardTitle>
+                <CardTitle>
+                  <a href={`/apartmentshow/${apartment.id}`}>Go to Listing</a>
                 </CardTitle>
               </CardBody>
             </Card>
