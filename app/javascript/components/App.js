@@ -12,13 +12,22 @@ import NotFound from "./pages/NotFound"
 
 
 
-const App = ({
-  logged_in,
-  current_user,
-  new_user_route,
-  sign_in_route,
-  sign_out_route
-}) => {
+const App = (props) => {
+
+  const createApartment = (apartment) => {
+    fetch("/apartments", {
+      body: JSON.stringify(apartment),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    })
+    .then((response) => response.json())
+    .then(() => readApartments())
+    .catch((error) => console.log(error))
+
+
+  }
   
   return (
     <>
@@ -29,7 +38,7 @@ const App = ({
           <Route path="/apartmentindex" element={<ApartmentIndex />} />
           <Route path="/apartmentshow/:id" element={<ApartmentShow />} />
           <Route path="/apartmentedit/:id" element={<ApartmentEdit />} />
-          <Route path="/apartmentnew" element={<ApartmentNew />} />
+          <Route path="/apartmentnew" element={<ApartmentNew current_user={props.current_user} createApartment={createApartment} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
