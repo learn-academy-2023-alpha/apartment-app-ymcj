@@ -8,6 +8,7 @@ import ApartmentIndex from "./pages/ApartmentIndex"
 import ApartmentShow from "./pages/ApartmentShow"
 import ApartmentEdit from "./pages/ApartmentEdit"
 import ApartmentNew from "./pages/ApartmentNew"
+import ProtectedIndex from "./pages/ProtectedIndex"
 import NotFound from "./pages/NotFound"
 
 
@@ -49,6 +50,7 @@ const App = (props) => {
           <Route path="/apartmentindex" element={<ApartmentIndex apartments={apartments} />} />
           <Route path="/apartmentshow/:id" element={<ApartmentShow />} />
           <Route path="/apartmentedit/:id" element={<ApartmentEdit />} />
+          <Route path="/myapartments" element={<ProtectedIndex apartments={apartments} current_user={props.current_user} />} />
           <Route path="/apartmentnew" element={<ApartmentNew current_user={props.current_user} createApartment={createApartment} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
