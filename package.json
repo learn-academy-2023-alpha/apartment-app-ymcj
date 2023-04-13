@@ -27,5 +27,9 @@
     "roots": [
       "app/javascript/components"
     ]
+  },
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
   }
 }
