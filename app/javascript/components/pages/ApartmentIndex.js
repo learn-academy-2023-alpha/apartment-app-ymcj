@@ -1,40 +1,40 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import {Card, CardBody, Button, CardTitle} from "reactstrap"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import { Card, CardBody, Button, CardTitle } from "reactstrap";
 
-const ApartmentIndex = ({apartments}) => {
+const ApartmentIndex = ({ apartments }) => {
   return (
     <>
       <h1>Apartment Listings</h1>
-      <div className='apartments'>
+      <div className="apartments">
         {apartments?.map((apartment, index) => {
           return (
             <Card
               key={index}
               style={{
-                width: '18rem'
+                width: "18rem",
               }}
+              body
             >
-              <img
-                alt={apartment.address}
-                src={apartment.image}
-              />
+              <img alt={apartment.address} src={apartment.image} />
               <CardBody>
                 <CardTitle tag="h5">
                   {apartment.address},
-                  <br/>
+                  <br />
                   {apartment.planet}
                 </CardTitle>
-                <CardTitle>
-                  <a href={`/apartmentshow/${apartment.id}`}>Go to Listing</a>
-                </CardTitle>
+                <Button>
+                  <NavLink to={`/apartmentshow/${apartment.id}`}>
+                    Go to Listings
+                  </NavLink>
+                </Button>
               </CardBody>
             </Card>
-          )
+          );
         })}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ApartmentIndex
+export default ApartmentIndex;

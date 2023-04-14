@@ -2,15 +2,35 @@
 
 * {
     margin: 0 auto;
-    // text-align: center;
+    text-align: center;
 }
 
+img {
+    width: 16rem;
+    height: 16rem;
+}
+
+.mb-3 {
+    text-align: start;
+}
+.form-control {
+    text-align: start;
+}
+.nav-item {
+    padding-inline:10px;
+    color:white;
+}
 header {
     margin-bottom: 80px;
 }
 
 a {
     text-decoration: none;
+    color:white;
+}
+
+a:hover {
+    color:white;
 }
 
 ul {
@@ -19,6 +39,9 @@ ul {
     flex-direction: row;
 }
 
+.card-title a {
+    color: black;
+}
 footer {
     margin-top: 80px;
 }

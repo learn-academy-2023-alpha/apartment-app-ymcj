@@ -15,7 +15,7 @@ const ApartmentNew = ({ current_user, createApartment }) => {
     utilities: "",
     pets: "",
     parking: "",
-    image: "",
+    image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
     user_id: current_user?.id,
   });
 
@@ -123,6 +123,7 @@ const ApartmentNew = ({ current_user, createApartment }) => {
             placeholder="Add an image URL"
             type="text"
             onChange={handleChange}
+            value={myApartment.image}
           />
         </FormGroup>
         <Button onClick={handleSubmit}>Create Listing</Button>
