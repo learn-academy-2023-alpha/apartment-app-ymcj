@@ -5,8 +5,8 @@ import {Button} from "reactstrap"
 const NotFound = () => {
   return (
     <>
-    <div className="not_found_bg">
-      <div className="not_found_txt">
+    <div className="not-found-bg">
+      <div className="not-found-txt">
         ⌿⏃☌⟒ ⋏⍜⏁ ⎎⍜⎍⋏⎅
         <br/>
         <br/>
