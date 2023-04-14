@@ -1,4 +1,10 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+.not_found_txt {
+    font-family: Orbitron;
+    background: url(notFoundBackground.png);
+}
 
 * {
     margin: 0 auto;

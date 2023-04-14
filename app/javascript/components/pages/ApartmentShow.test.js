@@ -28,11 +28,18 @@ describe("<ApartmentShow />", () => {
         <ApartmentShow logged_in={false} />
       </BrowserRouter>
     )
-    const editApartments = userEvent.click(
-      screen.getByRole("link", { name: /edit apartment listing/i })
-    )
     const allApartments = userEvent.click(
       screen.getByRole("link", { name: /back to listings/i })
+    )
+  })
+  it("has an edit button for a registered user", () => {
+    render(
+      <BrowserRouter>
+        <ApartmentShow logged_in={true} />
+      </BrowserRouter>
+    )
+    const editApartments = userEvent.click(
+      screen.getByRole("link", { name: /edit apartment listing/i })
     )
   })
   it("has a delete button for a register user", () => {
