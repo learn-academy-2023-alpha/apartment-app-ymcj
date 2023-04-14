@@ -55,7 +55,7 @@ RSpec.describe "Apartments", type: :request do
     expect(apartment.pets).to eq true
     expect(apartment.parking).to eq "ship hangar"
     expect(apartment.image).to eq "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg"
-    expect(apartment.user_id).to eq user.id  
+    expect(apartment.user_id).to eq user.id
   end
 end
 
@@ -177,9 +177,9 @@ end
       expect(response).to have_http_status(422)
       json = JSON.parse(response.body)
       expect(json['image']).to include "can't be blank"
-end
+  end
 
-it "does not create an apartment without a user_id" do 
+  it "does not create an apartment without a user_id" do 
   apartment_params = {
       apartment: {
         bedrooms: 3, bathrooms: 7, address: "14 Glamuleon Drive", planet: "GlipGlop", square_footage: 2000, price: 500000, utilities: "solar panels, slime chamber, washing machine", pets: true, parking: "ship hangar", image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg"
@@ -189,7 +189,486 @@ it "does not create an apartment without a user_id" do
     expect(response).to have_http_status(422)
     json = JSON.parse(response.body)
     expect(json['user_id']).to include "can't be blank"
-end
+  end
+  describe "PATCH /update" do
+    it "updates an apartment" do 
+      apartment_params = {
+        apartment: {
+          bedrooms: 3, 
+          bathrooms: 7, 
+          address: "14 Glamuleon Drive", 
+          planet: "GlipGlop", 
+          square_footage: 2000, 
+          price: 500000, 
+          utilities: "solar panels, slime chamber, washing machine", 
+          pets: true, 
+          parking: "ship hangar", 
+          image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+          user_id: user.id
+        }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+          bedrooms: 3, 
+          bathrooms: 7, 
+          address: "14 Glamuleon Drive", 
+          planet: "GlipGlop", 
+          square_footage: 2000, 
+          price: 500000, 
+          utilities: "solar panels, slime chamber, washing machine", 
+          pets: true, 
+          parking: "ship hangar", 
+          image: "TESThttps://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+          user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response).to have_http_status(200)
+      expect(updated_apartment.bedrooms).to eq 3
+      expect(updated_apartment.bathrooms).to eq 7
+      expect(updated_apartment.address).to eq "14 Glamuleon Drive"
+      expect(updated_apartment.planet).to eq "GlipGlop"
+      expect(updated_apartment.square_footage).to eq 2000
+      expect(updated_apartment.price).to eq 500000
+      expect(updated_apartment.utilities).to eq "solar panels, slime chamber, washing machine"
+      expect(updated_apartment.pets).to eq true
+      expect(updated_apartment.parking).to eq "ship hangar"
+      expect(updated_apartment.image).to eq "TESThttps://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg"
+      expect(updated_apartment.user_id).to eq user.id
+      end
+      it "doesn't update an apartment without bedrooms" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: "",
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['bedrooms']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without bathrooms" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: "",
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['bathrooms']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without an address" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['address']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without a planet" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "123", 
+            planet: "", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['planet']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without square footage" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: "", 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['square_footage']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without a price" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: "", 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['price']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without utilities" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['utilities']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without pets" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: "", 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['pets']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without parking" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['parking']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without an image" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: 2,
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "",
+            user_id: user.id
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['image']).to include "can't be blank"
+      end
+      it "doesn't update an apartment without a user id" do
+        apartment_params = {
+          apartment: {
+            bedrooms: 3, 
+            bathrooms: 7, 
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: user.id
+          }
+      }
+      post "/apartments", params: apartment_params
+      apartment = Apartment.first
+      updated_apartment_params = {
+        apartment: {
+            bedrooms: 3,
+            bathrooms: "",
+            address: "14 Glamuleon Drive", 
+            planet: "GlipGlop", 
+            square_footage: 2000, 
+            price: 500000, 
+            utilities: "solar panels, slime chamber, washing machine", 
+            pets: true, 
+            parking: "ship hangar", 
+            image: "https://live.staticflickr.com/65535/50077136637_f3611de27c_b.jpg",
+            user_id: ""
+        }
+      }
+      patch "/apartments/#{apartment.id}", params: updated_apartment_params
+      updated_apartment = Apartment.find(apartment.id)
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['user_id']).to include "can't be blank"
+      end
+    end
 
 describe "DELETE /destroy" do
   it "deletes an apartment" do
