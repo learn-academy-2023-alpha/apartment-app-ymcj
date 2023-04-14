@@ -1,12 +1,22 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 * {
     margin: 0 auto;
     // text-align: center;
+    font-family: 'Orbitron', sans-serif;
 }
 
 header {
-    margin-bottom: 80px;
+    margin-bottom: 55px;
+}
+
+.home-page {
+    background-image: url("https://cdn.pixabay.com/photo/2022/11/12/12/02/futuristic-7586888_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100vh;
 }
 
 a {
@@ -20,7 +30,7 @@ ul {
 }
 
 footer {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 // home page
