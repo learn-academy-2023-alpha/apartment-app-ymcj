@@ -7,10 +7,6 @@ import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText,
 } from "reactstrap";
 
@@ -58,17 +54,6 @@ const Header = ({
                 </NavItem>
               </>
             )}
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu end>
-                <DropdownItem>Option 1</DropdownItem>
-                <DropdownItem>Option 2</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Reset</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
           </Nav>
           <NavbarText>Find a new place to call home</NavbarText>
         </Collapse>

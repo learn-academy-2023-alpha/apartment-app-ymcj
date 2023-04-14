@@ -1,6 +1,6 @@
 import React from "react";
 
-const Home = () => {
+const Home = ({ YMCA }) => {
   return (
     <>
       <div className="home-title">
