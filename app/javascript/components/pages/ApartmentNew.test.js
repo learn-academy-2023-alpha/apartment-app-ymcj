@@ -53,7 +53,7 @@ describe("<ApartmentNew />", () => {
   })
 
   it("has a textbox for square footage", () => {
-    const apartments = screen.getByPlaceholderText(/how big is the apartment\?/i)
+    const apartments = screen.getByPlaceholderText(/what is the square footage of the apartment/i)
     expect(apartments).toBeInTheDocument()
   })
 
@@ -63,7 +63,7 @@ describe("<ApartmentNew />", () => {
   })
 
   it("has a textbox for utilities", () => {
-    const apartments =screen.getByPlaceholderText(/utilities/i)
+    const apartments =screen.getByPlaceholderText(/what utilities does the apartment include/i)
     expect(apartments).toBeInTheDocument()
   })
 
@@ -73,7 +73,7 @@ describe("<ApartmentNew />", () => {
   })
 
   it("has a textbox for image", () => {
-    const apartments = screen.getByPlaceholderText(/place an image/i)
+    const apartments = screen.getByPlaceholderText(/what is the price of the apartment/i)
     expect(apartments).toBeInTheDocument()
   })
 
