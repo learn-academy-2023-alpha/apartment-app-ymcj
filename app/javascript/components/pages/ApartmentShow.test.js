@@ -42,7 +42,7 @@ describe("<ApartmentShow />", () => {
       screen.getByRole("link", { name: /edit apartment listing/i })
     )
   })
-  it("has a delete button for a register user", () => {
+  it("has a delete button for a registered user", () => {
     render(
       <BrowserRouter>
         <ApartmentShow logged_in={true} />
