@@ -1,6 +1,6 @@
 import React from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import {Card, CardBody, CardSubtitle, CardText, CardTitle, Button} from "reactstrap"
+import {Card, CardBody, CardText, CardTitle, Button} from "reactstrap"
 import {NavLink} from "react-router-dom"
 
 
@@ -16,9 +16,16 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
       navigate("/myapartments")
     }
 
+    const petsAllowed = () => {
+      if(selectedApartment.pets === true){
+        return "Yes"
+      } else {
+        return "No"
+      }
+  }
+
     return (
     <>
-    
       {selectedApartment && (
         <Card
         style={{
@@ -31,25 +38,33 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
         />
         <CardBody>
           <CardTitle>
-            Address: {selectedApartment.address}
+            APARTMENT INFORMATION
           </CardTitle>
-          <CardSubtitle>
+          <CardText>
+            Address: {selectedApartment.address}
+          </CardText>
+          <CardText>
             Planet: {selectedApartment.planet}
-          </CardSubtitle>
+          </CardText>
           <CardText>
             Bedrooms: {selectedApartment.bedrooms}
           </CardText>
           <CardText>
             Bathrooms: {selectedApartment.bathrooms}
-          </CardText><CardText>
-            square_footage: {selectedApartment.square_footage}
-          </CardText><CardText>
+          </CardText>
+          <CardText>
+            Square_Footage: {selectedApartment.square_footage}
+          </CardText>
+          <CardText>
             Price: {selectedApartment.price}
-          </CardText><CardText>
+          </CardText>
+          <CardText>
             Utilities: {selectedApartment.utilities}
-          </CardText><CardText>
-            Pets: {selectedApartment.pets}
-          </CardText><CardText>
+          </CardText>
+          <CardText>
+            Pets: {petsAllowed()}
+          </CardText>
+          <CardText>
             Parking: {selectedApartment.parking}
           </CardText>
         </CardBody>
@@ -77,5 +92,4 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
     </>
   )
 }
-
 export default ApartmentShow
