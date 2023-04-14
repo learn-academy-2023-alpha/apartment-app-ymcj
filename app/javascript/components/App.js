@@ -49,10 +49,6 @@ const App = (props) => {
       .then((payload) => readApartments(payload))
       .catch((errors) => console.log("Apartment update errors:", errors));
   };
-    .then((response) => response.json())
-    .then(() => readApartments())
-    .catch((error) => console.log(error))
-  }
   
   const deleteApartment = (id) => {
     fetch(`/apartments/${id}`, {
