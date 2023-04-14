@@ -19,7 +19,8 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
     return (
     <>
     
-      {selectedApartment && (
+      {selectedApartment && ( 
+      <div  className="container">
         <Card
         style={{
           width: "45%"
@@ -29,6 +30,7 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
           alt={selectedApartment.address}
           src={selectedApartment.image}
         />
+       
         <CardBody>
           <CardTitle>
             Address: {selectedApartment.address}
@@ -54,6 +56,7 @@ const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
           </CardText>
         </CardBody>
       </Card>
+      </div>
       )}
       {logged_in && (
         <>
