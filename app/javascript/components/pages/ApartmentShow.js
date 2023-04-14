@@ -4,14 +4,21 @@ import {Card, CardBody, CardSubtitle, CardText, CardTitle, Button} from "reactst
 import {NavLink} from "react-router-dom"
 
 
-const ApartmentShow = ({apartments}) => {
+const ApartmentShow = ({apartments, logged_in, deleteApartment}) => {
+
     const { id } = useParams()
     const navigate = useNavigate()
 
     let selectedApartment = apartments?.find(apartment => apartment.id === +id)
 
+    const handleSubmit = () => {
+      deleteApartment(selectedApartment.id)
+      navigate("/myapartments")
+    }
+
     return (
     <>
+    
       {selectedApartment && (
         <Card
         style={{
@@ -48,17 +55,24 @@ const ApartmentShow = ({apartments}) => {
         </CardBody>
       </Card>
       )}
+      {logged_in && (
+        <>
       <Button>
-      <NavLink 
-      to={`/apartmentedit/${selectedApartment?.id}`}>
-          Edit Apartment
-      </NavLink>
+        <NavLink to={`/apartmentedit/${selectedApartment?.id}`}>
+          Edit Apartment Listing
+        </NavLink>
       </Button>
+      <Button onClick={handleSubmit}>
+        <NavLink to={'/apartmentindex'}>
+          Delete Apartment Listing
+        </NavLink>
+      </Button>
+      </>
+    )}
       <Button>
-      <NavLink 
-      to={`/apartmentindex`}>
+        <NavLink to={`/myapartments`}>
           Back to Listings
-      </NavLink>
+        </NavLink>
       </Button>
     </>
   )
