@@ -24,7 +24,7 @@ const Header = ({
   return (
     <header>
       <Navbar fixed="top" expand color="dark" dark>
-        <NavbarBrand href="/">Apartment App</NavbarBrand>
+        <NavbarBrand href="/">Outta This World</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>

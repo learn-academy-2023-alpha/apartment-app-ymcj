@@ -1,13 +1,27 @@
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 * {
     margin: 0 auto;
     text-align: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background-color: gainsboro;
 }
 
 img {
     width: 16rem;
     height: 16rem;
+}
+
+.home-page {
+    background-image: url("https://cdn.pixabay.com/photo/2022/11/12/12/02/futuristic-7586888_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+    height: 100vh;
 }
 
 .mb-3 {
@@ -43,7 +57,7 @@ ul {
     color: black;
 }
 footer {
-    margin-top: 80px;
+    margin-top: 55px;
 }
 
 // home page
